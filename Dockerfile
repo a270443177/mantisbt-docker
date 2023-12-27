@@ -9,14 +9,14 @@ RUN set -xe \
         # PHP dependencies
         libfreetype6-dev libpng-dev libjpeg-dev libpq-dev libxml2-dev \
         # New in PHP 7.4, required for mbstring, see https://github.com/docker-library/php/issues/880
-        libonig-dev \
-    && docker-php-ext-configure gd --with-jpeg --with-freetype \
-    && docker-php-ext-install gd mbstring mysqli soap \
+        libonig-dev libldap2-dev \
+    && docker-php-ext-configure ldap gd --with-jpeg --with-freetype \
+    && docker-php-ext-install ldap gd mbstring mysqli soap \
     && rm -rf /var/lib/apt/lists/* \
     && a2enmod rewrite
 
-ENV MANTIS_VER 2.25.4
-ENV MANTIS_MD5 9466464aa7fd154736356f76d6882f04
+ENV MANTIS_VER 2.26.0
+#ENV MANTIS_MD5 9466464aa7fd154736356f76d6882f04
 ENV MANTIS_URL https://sourceforge.net/projects/mantisbt/files/mantis-stable/${MANTIS_VER}/mantisbt-${MANTIS_VER}.tar.gz
 ENV MANTIS_FILE mantisbt.tar.gz
 
