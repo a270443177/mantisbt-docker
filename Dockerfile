@@ -10,7 +10,7 @@ RUN set -xe \
         libfreetype6-dev libpng-dev libjpeg-dev libpq-dev libxml2-dev \
         # New in PHP 7.4, required for mbstring, see https://github.com/docker-library/php/issues/880
         libonig-dev libldap2-dev \
-    && docker-php-ext-configure ldap gd --with-jpeg --with-freetype \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install ldap gd mbstring mysqli soap \
     && rm -rf /var/lib/apt/lists/* \
     && a2enmod rewrite
